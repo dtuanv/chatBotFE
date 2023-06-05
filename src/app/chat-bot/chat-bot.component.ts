@@ -11,24 +11,25 @@ interface Message {
   styleUrls: ['./chat-bot.component.css']
 })
 export class ChatBotComponent {
-  messages: string[] = [];
-  messagesBot: string[] =[];
-  userInput: string = '';
+  messageQueue: any[] = [];
+  userMessage: string = '';
+  botMessage: string = '';
 
-  sendMessage() {
-    const inputElement = document.querySelector('.input-user');
-    if (inputElement instanceof HTMLInputElement && inputElement.value.trim() !== '') {
-      this.messages.push(inputElement.value.trim());
-      inputElement.value = '';
+  sendMessage(user: string) {
+    let message = '';
+    if (user === 'User') {
+      message = this.userMessage;
+      this.userMessage = '';
+    } else {
+      message = this.botMessage;
+      this.botMessage = '';
     }
-  }
 
-  sendMessage2() {
-    const inputElement = document.querySelector('.input-bot');
-    if (inputElement instanceof HTMLInputElement && inputElement.value.trim() !== '') {
-      this.messagesBot.push(inputElement.value.trim());
-      inputElement.value = '';
-    }
-  }
+    const messageObject = {
+      user: user,
+      message: message
+    };
 
+    this.messageQueue.push(messageObject);
+  }
 }

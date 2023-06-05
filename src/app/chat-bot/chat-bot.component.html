@@ -1,21 +1,32 @@
 <div class="body">
-  <mat-card [class.empty]="messages.length === 0" class="chat-messages-all">
-    <div *ngIf="messages.length > 0">
-      <div *ngFor="let message of messages">
-        <mat-card class="chat-message">
-          {{ message }}
+  <mat-card [class.empty]="messageQueue.length === 0" class="chat-messages-all">
+    <div *ngIf="messageQueue.length > 0">
+      <div *ngFor="let message of messageQueue">
+        <mat-card [ngClass]="{'chat-message': true, 'bot': message.user === 'Bot'}">
+          <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>{{ message.message }}
         </mat-card>
       </div>
     </div>
-    <div *ngIf="messages.length === 0" class="empty">
+    <div *ngIf="messageQueue.length === 0" class="empty">
       No messages
     </div>
   </mat-card>
 
-  <div class="chat-input">
-    <input class="input-user" type="text" (keyup.enter)="sendMessage()" placeholder="Type your message..." />
-    <button (click)="sendMessage()">Send</button>
 
+
+  <div class="chat-input">
+    <input class="input-user" type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage('User')" placeholder="Type your message..." />
+    <button (click)="sendMessage('User')">Send</button>
+
+    <input class="input-bot" type="text" [(ngModel)]="botMessage" (keyup.enter)="sendMessage('Bot')" placeholder="Type your message..." />
+    <button style="background-color: firebrick" (click)="sendMessage('Bot')">Send as Bot</button>
   </div>
+
+<!--  <div class="chat-output">-->
+<!--    <div *ngFor="let message of messageQueue">-->
+<!--      <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>{{ message.message }}-->
+<!--    </div>-->
+<!--  </div>-->
+
 </div>
 

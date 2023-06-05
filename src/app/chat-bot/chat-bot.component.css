@@ -1,11 +1,6 @@
 .body{
   background-color: #ffffff;
 }
-.chat-input {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Align items to the right */
-}
 
 .chat-input {
   display: flex;
@@ -34,10 +29,9 @@
 .chat-input button:hover {
   background-color: #45a049;
 }
-
 .chat-messages-all {
   padding: 10px;
-  text-align: right; /* Aligns the messages container to the right */
+  text-align: right;
 }
 
 .chat-message {
@@ -46,13 +40,19 @@
   margin: 0 20px 10px 0;
   border-radius: 10px;
   display: inline-block;
-  text-align: left; /* Aligns the text content to the left within the message card */
+  text-align: left;
+}
+
+.chat-message.bot {
+  background-color: #b23939; /* Set the background color for User2 messages */
+  text-align: left;
 }
 
 .empty {
   text-align: center;
   padding: 20px;
 }
+
 .chat-messages-all {
   margin: 0 5% 0 5%;
   background-color: #e8e8e8;
@@ -60,5 +60,5 @@
 }
 
 .empty {
-  background-color: #ffffff; /* Set the background color to white */
+  background-color: #ffffff;
 }

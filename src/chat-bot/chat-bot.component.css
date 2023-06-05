@@ -69,7 +69,7 @@
   font-family: 'Arial', sans-serif;
   margin-right: 10px;
 }
-.chat-messages-bot.empty {
+.chat-messages-bot.emptyBot {
   background-color: white;
   border-radius: 0;
   padding: 0
@@ -78,6 +78,6 @@
 .chat-message-bot {
   margin-bottom: 10px;
   padding: 5px;
-  background-color: #dcf8c6;
+  /*background-color: firebrick;*/
   border-radius: 5px;
 }

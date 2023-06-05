@@ -18,7 +18,7 @@ export class ChatBotComponent {
   sendMessage() {
     const inputElement = document.querySelector('.input-user');
     if (inputElement instanceof HTMLInputElement && inputElement.value.trim() !== '') {
-      this.messages.unshift(inputElement.value.trim());
+      this.messages.push(inputElement.value.trim());
       inputElement.value = '';
     }
   }
@@ -26,7 +26,7 @@ export class ChatBotComponent {
   sendMessage2() {
     const inputElement = document.querySelector('.input-bot');
     if (inputElement instanceof HTMLInputElement && inputElement.value.trim() !== '') {
-      this.messagesBot.unshift(inputElement.value.trim());
+      this.messagesBot.push(inputElement.value.trim());
       inputElement.value = '';
     }
   }

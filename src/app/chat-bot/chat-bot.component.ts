@@ -32,4 +32,7 @@ export class ChatBotComponent {
 
     this.messageQueue.push(messageObject);
   }
+  clearTheChat(){
+    this.messageQueue = [];
+  }
 }

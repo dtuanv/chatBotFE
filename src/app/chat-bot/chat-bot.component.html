@@ -10,9 +10,8 @@
     <div *ngIf="messageQueue.length === 0" class="empty">
       No messages
     </div>
+    <button *ngIf="messageQueue.length !== 0" (click)="clearTheChat()" class="clear-button">Clear the Chat</button>
   </mat-card>
-
-
 
   <div class="chat-input">
     <input class="input-user" type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage('User')" placeholder="Type your message..." />

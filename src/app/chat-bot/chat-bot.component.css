@@ -62,3 +62,17 @@
 .empty {
   background-color: #ffffff;
 }
+.clear-button{
+padding: 10px 20px;
+background-color: #c50114;
+color: #ffffff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+width: 100px;
+margin-left: 10px; /* Add margin between input and button */
+}
+
+.clear-button:hover {
+  background-color: #45a049;
+}

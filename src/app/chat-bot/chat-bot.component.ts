@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
 
 interface Message {
   sender: string;
@@ -31,7 +31,15 @@ export class ChatBotComponent {
     };
 
     this.messageQueue.push(messageObject);
+
+    // Reset the input fields
+    if (user === 'User') {
+      this.userMessage = '';
+    } else {
+      this.botMessage = '';
+    }
   }
+
   clearTheChat(){
     this.messageQueue = [];
   }
@@ -44,5 +52,4 @@ export class ChatBotComponent {
     }
     return formattedMessage;
   }
-
 }

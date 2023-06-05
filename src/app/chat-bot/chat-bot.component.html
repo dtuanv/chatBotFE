@@ -16,9 +16,9 @@
 
   <div class="chat-input">
     <input class="input-user" type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage('User')" placeholder="Type your message..." />
-    <button (click)="sendMessage('User')">Send</button>
+    <button (click)="sendMessage('User')" [disabled]="!userMessage">Send</button>
 
     <input class="input-bot" type="text" [(ngModel)]="botMessage" (keyup.enter)="sendMessage('Bot')" placeholder="Type your message..." />
-    <button style="background-color: firebrick" (click)="sendMessage('Bot')">Send as Bot (Test)</button>
+    <button style="background-color: firebrick" (click)="sendMessage('Bot')" [disabled]="!botMessage">Send as Bot (Test)</button>
   </div>
 </div>

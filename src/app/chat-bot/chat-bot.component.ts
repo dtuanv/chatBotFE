@@ -35,4 +35,14 @@ export class ChatBotComponent {
   clearTheChat(){
     this.messageQueue = [];
   }
+
+  formatMessage(message: string): string {
+    const lineBreakInterval = 100;
+    let formattedMessage = '';
+    for (let i = 0; i < message.length; i += lineBreakInterval) {
+      formattedMessage += message.substring(i, i + lineBreakInterval) + '<br>';
+    }
+    return formattedMessage;
+  }
+
 }

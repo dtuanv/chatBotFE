@@ -3,7 +3,8 @@
     <div *ngIf="messageQueue.length > 0">
       <div *ngFor="let message of messageQueue">
         <mat-card [ngClass]="{'chat-message': true, 'bot': message.user === 'Bot'}">
-          <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>{{ message.message }}
+          <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>
+          <div class="message-content" [innerHTML]="formatMessage(message.message)"></div>
         </mat-card>
       </div>
     </div>
@@ -20,12 +21,4 @@
     <input class="input-bot" type="text" [(ngModel)]="botMessage" (keyup.enter)="sendMessage('Bot')" placeholder="Type your message..." />
     <button style="background-color: firebrick" (click)="sendMessage('Bot')">Send as Bot (Test)</button>
   </div>
-
-<!--  <div class="chat-output">-->
-<!--    <div *ngFor="let message of messageQueue">-->
-<!--      <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>{{ message.message }}-->
-<!--    </div>-->
-<!--  </div>-->
-
 </div>
-

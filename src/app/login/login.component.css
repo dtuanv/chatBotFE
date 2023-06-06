@@ -1,0 +1,15 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.centered-card {
+  width: 35vw;
+  height: auto;
+}
+.pd-field{
+  padding-left: 16px;
+  padding-right: 16px;
+}

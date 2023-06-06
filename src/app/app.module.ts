@@ -9,6 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -25,7 +28,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         BrowserAnimationsModule,
         MatCardModule,
         FormsModule,
-        HeaderComponent
+        HeaderComponent,
+        MatButtonModule,
+        MatIconModule,
     ]
 })
 export class AppModule { }

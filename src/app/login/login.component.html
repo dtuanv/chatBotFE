@@ -1,0 +1,20 @@
+<div class="card-container">
+  <mat-card class="centered-card">
+    <div style="display: flex;  align-self: center; font-size: 27px; padding: 13px;">Login</div>
+    <mat-form-field class="pd-field" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput>
+    </mat-form-field>
+
+    <mat-form-field class="pd-field" appearance="outline">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="pd-field"  style="padding-bottom: 10px;">
+      <button mat-raised-button color="primary">Login</button>
+    </div>
+  </mat-card>
+</div>

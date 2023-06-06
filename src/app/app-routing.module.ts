@@ -5,7 +5,7 @@ import { ChatBotComponent } from './chat-bot/chat-bot.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path:'', component: ChatBotComponent},
+  {path:'chat', component: ChatBotComponent},
   {path:'login', component: LoginComponent}
 ];
 

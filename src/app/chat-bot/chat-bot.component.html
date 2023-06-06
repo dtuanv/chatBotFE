@@ -1,5 +1,5 @@
 <div class="body">
-  <mat-card [class.empty]="messageQueue.length === 0" class="chat-messages-all">
+  <mat-card style="    height: 80vh;" [class.empty]="messageQueue.length === 0" class="chat-messages-all">
     <div *ngIf="messageQueue.length > 0">
       <div *ngFor="let message of messageQueue">
         <mat-card [ngClass]="{'chat-message': true, 'bot': message.user === 'Bot'}">

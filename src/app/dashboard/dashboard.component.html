@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+
+<div class="body">
+
+  <div *ngFor="let question of questions; let i = index">
+    <mat-card class="chat-messages-all" style="padding-bottom: 25px;">
+      <div style="width: 100%;display: flex;justify-content: center;padding-bottom: 15px;">Frage Nr. {{i + 1}} </div>
+      <div style="width: 100%;">
+        <mat-card class="user-chat">
+          <div>{{question.input}}</div>
+        </mat-card>
+      </div>
+      <div *ngFor="let step of question.stepAskSet">
+        <div style="width: 100%;">
+          <mat-card class="bot-chat">
+            <div>{{step.question}}</div>
+          </mat-card>
+        </div>
+        <div style="width: 100%;">
+          <mat-card class="user-chat">
+            <div>{{step.answer}}</div>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+
+</div>

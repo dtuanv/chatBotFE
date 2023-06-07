@@ -3,8 +3,36 @@
     <div *ngIf="messageQueue.length > 0">
       <div *ngFor="let message of messageQueue">
         <mat-card [ngClass]="{'chat-message': true, 'bot': message.user === 'Bot'}">
-          <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{ message.user }}: </span>
+          <span [ngClass]="{'user-message': message.user === 'User', 'bot-message': message.user === 'Bot'}">{{
+            message.user }}: </span>
           <div class="message-content" [innerHTML]="formatMessage(message.message)"></div>
+        </mat-card>
+        <mat-card *ngIf="message.answer !== undefined" class="bot-chat">
+          <div>{{message.answer}}</div>
+        </mat-card>
+        <mat-card class="bot-chat" *ngIf="message.initial_answer !== undefined">
+          <div>{{message.initial_answer}}</div>
+          <div *ngIf="message.steps.length > 1">
+            <div *ngFor="let step of botSteps;let i = index">
+              <div style="padding-top :15px; color: rgb(58 79 185); ">Information: {{step.info}}</div>
+              <div style="padding-top :15px; color: rgb(192, 28, 207); ">{{step.question}}</div>
+
+
+              <div style="padding-top:5px">
+                <button *ngIf="i === botSteps.length - 1" mat-raised-button style="color: green;" (click)="stepAnswer('success',message.steps,indexStep)">- {{step.answers.success}}</button>
+              </div>
+              <div style="padding-top:10px">
+                <button mat-raised-button style="color: rgb(228, 139, 22);" (click)="stepAnswer('failure',message.steps,indexStep)">- {{step.answers.failure}}</button>
+              </div>
+
+              <div style="padding-top:10px">
+                <button  *ngIf="i === botSteps.length - 1" mat-raised-button style="color: rgb(226, 25, 25);" (click)="stepAnswer('unable',message.steps,indexStep)">- {{step.answers.unable}}</button>
+              </div>
+              <div style=" border-bottom:9px solid #ccc;  padding-bottom: 10px;  margin-bottom: 10px;"></div>
+            </div>
+
+          </div>
+
         </mat-card>
       </div>
     </div>
@@ -15,10 +43,13 @@
   </mat-card>
 
   <div class="chat-input">
-    <input class="input-user" type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage('User')" placeholder="Type your message..." />
+    <input class="input-user" type="text" [(ngModel)]="userMessage" (keyup.enter)="sendMessage('User')"
+      placeholder="Type your message..." />
     <button (click)="sendMessage('User')" [disabled]="!userMessage">Send</button>
 
-    <input class="input-bot" type="text" [(ngModel)]="botMessage" (keyup.enter)="sendMessage('Bot')" placeholder="Type your message..." />
-    <button style="background-color: firebrick" (click)="sendMessage('Bot')" [disabled]="!botMessage">Send as Bot (Test)</button>
+    <input class="input-bot" type="text" [(ngModel)]="botMessage" (keyup.enter)="sendMessage('Bot')"
+      placeholder="Type your message..." />
+    <button style="background-color: firebrick" (click)="sendMessage('Bot')" [disabled]="!botMessage">Send as Bot
+      (Test)</button>
   </div>
 </div>

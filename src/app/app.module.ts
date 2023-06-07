@@ -12,6 +12,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
         HeaderComponent,
         MatButtonModule,
         MatIconModule,
+        HttpClientModule
     ]
 })
 export class AppModule { }

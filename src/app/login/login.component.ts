@@ -20,12 +20,27 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   invalidMessage: string = '';
+  userAcount = [
+    {username:'team14', password:'14', role:'user'},
+    {username:'admin', password:'admin', role:'admin'},
+  ]
 
   toLogin(){
-     if(this.username == 'team14' && this.password =='14'){
-      console.log("14")
+    let findUser = this.userAcount.find(user => {
+        return user.username == this.username  && user.password == this.password
+    })
+
+     if(findUser){
+      console.log("findUser ",findUser.role)
       this.invalidMessage = ''
-      this.router.navigate(['/chat']);
+      localStorage.setItem('role',findUser.role)
+      if(findUser.role == 'admin'){
+        this.router.navigate(['/admin']);
+
+      }else{
+        this.router.navigate(['/chat']);
+      }
+
      }else{
       this.invalidMessage = '*Username or Password not correct'
      }

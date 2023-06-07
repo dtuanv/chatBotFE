@@ -1,6 +1,17 @@
 .body{
   background-color: #ffffff;
 }
+.bot-chat{
+  background-color:#f8c6c7;
+    padding: 10px;
+    margin: 0 20px 10px 0;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: left;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word
+}
 
 .chat-input {
   display: flex;

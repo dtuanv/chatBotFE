@@ -76,9 +76,30 @@ export class ChatBotComponent {
           this.messageObject = {
             user: user,
             message: message,
-            answer: this.botAnswer.answer
+            answer: this.botAnswer.answer,
+            state: this.botAnswer.state
           };
           this.messageQueue.push(this.messageObject);
+
+          let stepAskSet: any[] = []
+
+          let inputUnable = {
+            input:   this.userMessageLocal,
+            stepAskSet:stepAskSet
+
+          }
+          this.http.post('http://localhost:8614/saveMessage', inputUnable).subscribe(
+            (response) => {
+              // Handle the response
+              this.botAnswer = response
+              console.log(" this.botAnswer ", response);
+             this.botAnswerMessage = 'Ihre Frage wurde an unsere Team Weitergeleitet. Bitte kontaktieren Sie uns unter dieser E-Mail-Adresse team14@itech.com, damit wir Sie besser beraten können.'
+            },
+            (error) => {
+              // Handle any errors
+              console.error(error);
+            }
+          );
 
         }
 

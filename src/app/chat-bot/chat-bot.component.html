@@ -7,9 +7,12 @@
             message.user }}: </span>
           <div class="message-content" [innerHTML]="formatMessage(message.message)"></div>
         </mat-card>
-        <mat-card *ngIf="message.answer !== undefined" class="bot-chat">
-          <div>{{message.answer}}</div>
-        </mat-card>
+        <div  style="width: 100%;">
+          <mat-card *ngIf="message.answer !== undefined" class="bot-chat">
+            <div>{{message.answer}}</div>
+          </mat-card>
+        </div>
+
         <mat-card class="bot-chat" *ngIf="message.initial_answer !== undefined">
           <div>{{message.initial_answer}}</div>
           <div *ngIf="message.steps.length > 1">
@@ -34,6 +37,12 @@
           </div>
 
         </mat-card>
+
+        <div  style="width: 100%;">
+          <mat-card *ngIf="botAnswerMessage" class="bot-chat">
+            <div>{{botAnswerMessage}}</div>
+          </mat-card>
+        </div>
       </div>
     </div>
     <div *ngIf="messageQueue.length === 0" class="empty">

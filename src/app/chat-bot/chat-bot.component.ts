@@ -17,8 +17,10 @@ export class ChatBotComponent {
   constructor(private http: HttpClient) { }
   messageQueue: any[] = [];
   userMessage: string = '';
+  userMessageLocal: string = '';
   botMessage: string = '';
   botAnswer: any = {};
+  botAnswerMessage: string='';
   messageObject: any = {};
   botSteps: any[] = []
 
@@ -30,9 +32,12 @@ export class ChatBotComponent {
 
 
   sendMessage(user: string): void {
+    this.botAnswerMessage = ''
     let message = '';
     if (user === 'User') {
       message = this.userMessage;
+      this.userMessageLocal = this.userMessage
+
       this.userMessage = '';
     } else {
       message = this.botMessage;
@@ -58,6 +63,26 @@ export class ChatBotComponent {
         this.botAnswer = response
         console.log(" this.botAnswer ", response);
         if (this.botAnswer.label) {
+          this.messageObject = {
+            user: user,
+            message: message,
+            answer: this.botAnswer.answer
+          };
+          this.messageQueue.push(this.messageObject);
+
+        }
+
+        if (this.botAnswer.state) {
+          this.messageObject = {
+            user: user,
+            message: message,
+            answer: this.botAnswer.answer
+          };
+          this.messageQueue.push(this.messageObject);
+
+        }
+
+        if (this.botAnswer.answer && !this.botAnswer.state && !this.botAnswer.label ) {
           this.messageObject = {
             user: user,
             message: message,
@@ -115,7 +140,8 @@ export class ChatBotComponent {
           console.log(" this.botAnswer ", response);
           if (this.botAnswer.answer) {
             this.messageObject = {
-
+              user: 'User',
+              message: steps[this.indexStep].answers.success,
               answer: this.botAnswer.answer
             };
             this.messageQueue.push(this.messageObject);
@@ -130,20 +156,37 @@ export class ChatBotComponent {
     }
 
     if(answer == 'unable'){
-      let inputUnable = { state: "problem_solved" }
-      this.http.post('http://localhost:8080/it_chat/', inputUnable).subscribe(
+      let stepAskSet: any[] = []
+      this.botSteps.forEach((st, i)  => {
+
+        let putOb: any = {};
+        if(i == this.botSteps.length - 1){
+          putOb.question = st.question
+          putOb.answer = st.answers.unable
+
+        }else{
+          putOb.question = st.question
+          putOb.answer = st.answers.failure
+        }
+
+        stepAskSet.push(putOb)
+      });
+
+      console.log("this.userMessage ",  this.userMessageLocal)
+      let inputUnable = {
+        input:   this.userMessageLocal,
+        stepAskSet:stepAskSet
+
+      }
+
+      console.log("inputUnable ",inputUnable)
+        // state: "problem_solved"
+      this.http.post('http://localhost:8614/saveMessage', inputUnable).subscribe(
         (response) => {
           // Handle the response
           this.botAnswer = response
           console.log(" this.botAnswer ", response);
-          if (this.botAnswer.answer) {
-            this.messageObject = {
-
-              answer: this.botAnswer.answer
-            };
-            this.messageQueue.push(this.messageObject);
-
-          }
+         this.botAnswerMessage = 'Ihre Frage wurde an unsere Team Weitergeleitet. Bitte kontaktieren Sie uns unter dieser E-Mail-Adresse team14@itech.com, damit wir Sie besser beraten können.'
         },
         (error) => {
           // Handle any errors
@@ -162,9 +205,12 @@ export class ChatBotComponent {
   formatMessage(message: string): string {
     const lineBreakInterval = 100;
     let formattedMessage = '';
-    for (let i = 0; i < message.length; i += lineBreakInterval) {
-      formattedMessage += message.substring(i, i + lineBreakInterval) + '<br>';
+    if(message){
+      for (let i = 0; i < message.length; i += lineBreakInterval) {
+        formattedMessage += message.substring(i, i + lineBreakInterval) + '<br>';
+      }
     }
+
     return formattedMessage;
   }
 }
